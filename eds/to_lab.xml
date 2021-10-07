@@ -105,9 +105,6 @@
         </EntryList>
       </ContainerDataType>
 
-      <ContainerDataType name="SendHkCommand" baseType="CFE_HDR/CommandHeader">
-      </ContainerDataType>
-
       <ContainerDataType name="CMD" baseType="CFE_HDR/CommandHeader">
       </ContainerDataType>
 
@@ -187,7 +184,7 @@
           <Interface name="SEND_HK" shortDescription="Send telemetry command interface" type="CFE_SB/Telecommand">
             <!-- This uses a bare spacepacket with no payload -->
             <GenericTypeMapSet>
-              <GenericTypeMap name="TelecommandDataType" type="SendHkCommand" />
+              <GenericTypeMap name="TelecommandDataType" type="CFE_HDR/CommandHeader" />
             </GenericTypeMapSet>
           </Interface>
           <Interface name="HK_TLM" shortDescription="Software bus housekeeping telemetry interface" type="CFE_SB/Telemetry">

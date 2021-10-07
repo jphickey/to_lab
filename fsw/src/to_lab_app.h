@@ -38,6 +38,7 @@
 
 #include "common_types.h"
 #include "osapi.h"
+#include "to_lab_eds_typedefs.h"
 
 /*****************************************************************************/
 
@@ -61,9 +62,42 @@
 /******************************************************************************/
 
 /*
+** Global Data Section
+*/
+typedef struct
+{
+    CFE_SB_PipeId_t Tlm_pipe;
+    CFE_SB_PipeId_t Cmd_pipe;
+    osal_id_t       TLMsockid;
+    bool            downlink_on;
+    char            tlm_dest_IP[17];
+    bool            suppress_sendto;
+
+    TO_LAB_HkTlm_t        HkTlm;
+    TO_LAB_DataTypesTlm_t DataTypesTlm;
+
+    CFE_HDR_TelemetryHeader_PackedBuffer_t NetworkBuffer;
+} TO_LAB_GlobalData_t;
+
+extern TO_LAB_GlobalData_t TO_LAB_Global;
+
+/*
 ** Prototypes Section
 */
 void TO_Lab_AppMain(void);
+void TO_LAB_TaskPipe(const CFE_SB_Buffer_t *SbMsgPtr);
+
+/*
+ * Individual Command Handler prototypes
+ */
+int32 TO_LAB_AddPacket(const TO_LAB_AddPacketCmd_t *data);
+int32 TO_LAB_Noop(const TO_LAB_NoopCmd_t *data);
+int32 TO_LAB_EnableOutput(const TO_LAB_EnableOutputCmd_t *data);
+int32 TO_LAB_RemoveAll(const TO_LAB_RemoveAllCmd_t *data);
+int32 TO_LAB_RemovePacket(const TO_LAB_RemovePacketCmd_t *data);
+int32 TO_LAB_ResetCounters(const TO_LAB_ResetCountersCmd_t *data);
+int32 TO_LAB_SendDataTypes(const TO_LAB_SendDataTypesCmd_t *data);
+int32 TO_LAB_SendHousekeeping(const CFE_MSG_CommandHeader_t *data);
 
 /******************************************************************************/
 

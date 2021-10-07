@@ -55,24 +55,6 @@
 */
 #include "to_lab_sub_table.h"
 
-/*
-** Global Data Section
-*/
-typedef struct
-{
-    CFE_SB_PipeId_t Tlm_pipe;
-    CFE_SB_PipeId_t Cmd_pipe;
-    osal_id_t       TLMsockid;
-    bool            downlink_on;
-    char            tlm_dest_IP[17];
-    bool            suppress_sendto;
-
-    TO_LAB_HkTlm_t        HkTlm;
-    TO_LAB_DataTypesTlm_t DataTypesTlm;
-
-    CFE_HDR_TelemetryHeader_PackedBuffer_t NetworkBuffer;
-} TO_LAB_GlobalData_t;
-
 TO_LAB_GlobalData_t TO_LAB_Global;
 
 TO_LAB_Subs_t *  TO_LAB_Subs;
@@ -91,7 +73,6 @@ static CFE_EVS_BinFilter_t CFE_TO_EVS_Filters[] = {/* Event ID    mask */
 */
 void  TO_LAB_openTLM(void);
 int32 TO_LAB_init(void);
-void  TO_LAB_exec_local_command(CFE_SB_Buffer_t *SBBufPtr);
 void  TO_LAB_process_commands(void);
 void  TO_LAB_forward_telemetry(void);
 
@@ -300,86 +281,10 @@ int32 TO_LAB_EnableOutput(const TO_LAB_EnableOutputCmd_t *data)
 void TO_LAB_process_commands(void)
 {
     CFE_SB_Buffer_t *SBBufPtr;
-    CFE_SB_MsgId_t   MsgId = CFE_SB_INVALID_MSG_ID;
 
-    while (1)
+    while (CFE_SB_ReceiveBuffer(&SBBufPtr, TO_LAB_Global.Cmd_pipe, CFE_SB_POLL) == CFE_SUCCESS)
     {
-        switch (CFE_SB_ReceiveBuffer(&SBBufPtr, TO_LAB_Global.Cmd_pipe, CFE_SB_POLL))
-        {
-            case CFE_SUCCESS:
-
-                CFE_MSG_GetMsgId(&SBBufPtr->Msg, &MsgId);
-
-                /* For SB return statuses that imply a message: process it. */
-                switch (CFE_SB_MsgIdToValue(MsgId))
-                {
-                    case TO_LAB_CMD_MID:
-                        TO_LAB_exec_local_command(SBBufPtr);
-                        break;
-
-                    case TO_LAB_SEND_HK_MID:
-                        TO_LAB_SendHousekeeping((const CFE_MSG_CommandHeader_t *)SBBufPtr);
-                        break;
-
-                    default:
-                        CFE_EVS_SendEvent(TO_MSGID_ERR_EID, CFE_EVS_EventType_ERROR, "L%d TO: Invalid Msg ID Rcvd 0x%x",
-                                          __LINE__, (unsigned int)CFE_SB_MsgIdToValue(MsgId));
-                        break;
-                }
-                break;
-            default:
-                /* Exit command processing loop if no message received. */
-                return;
-        }
-    }
-}
-
-/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
-/*                                                                 */
-/*  TO_exec_local_command() -- Process local message               */
-/*                                                                 */
-/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
-void TO_LAB_exec_local_command(CFE_SB_Buffer_t *SBBufPtr)
-{
-    CFE_MSG_FcnCode_t CommandCode = 0;
-
-    CFE_MSG_GetFcnCode(&SBBufPtr->Msg, &CommandCode);
-
-    switch (CommandCode)
-    {
-        case TO_NOP_CC:
-            TO_LAB_Noop((const TO_LAB_NoopCmd_t *)SBBufPtr);
-            break;
-
-        case TO_RESET_STATUS_CC:
-            TO_LAB_ResetCounters((const TO_LAB_ResetCountersCmd_t *)SBBufPtr);
-            break;
-
-        case TO_SEND_DATA_TYPES_CC:
-            TO_LAB_SendDataTypes((const TO_LAB_SendDataTypesCmd_t *)SBBufPtr);
-            break;
-
-        case TO_ADD_PKT_CC:
-            TO_LAB_AddPacket((const TO_LAB_AddPacketCmd_t *)SBBufPtr);
-            break;
-
-        case TO_REMOVE_PKT_CC:
-            TO_LAB_RemovePacket((const TO_LAB_RemovePacketCmd_t *)SBBufPtr);
-            break;
-
-        case TO_REMOVE_ALL_PKT_CC:
-            TO_LAB_RemoveAll((const TO_LAB_RemoveAllCmd_t *)SBBufPtr);
-            break;
-
-        case TO_OUTPUT_ENABLE_CC:
-            TO_LAB_EnableOutput((const TO_LAB_EnableOutputCmd_t *)SBBufPtr);
-            break;
-
-        default:
-            CFE_EVS_SendEvent(TO_FNCODE_ERR_EID, CFE_EVS_EventType_ERROR,
-                              "L%d TO: Invalid Function Code Rcvd In Ground Command 0x%x", __LINE__,
-                              (unsigned int)CommandCode);
-            ++TO_LAB_Global.HkTlm.Payload.CommandErrorCounter;
+        TO_LAB_TaskPipe(SBBufPtr);
     }
 }
 
