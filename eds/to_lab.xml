@@ -71,7 +71,6 @@
       <ContainerDataType name="AddPacket_Payload" shortDescription="Subscribe Command Payload">
         <EntryList>
           <Entry name="Stream" type="CFE_SB/MsgId" />
-          <Entry name="PacketSize" type="BASE_TYPES/uint16" />
           <Entry name="Flags" type="CFE_SB/Qos" />
           <Entry name="BufLimit" type="BASE_TYPES/uint8" />
         </EntryList>

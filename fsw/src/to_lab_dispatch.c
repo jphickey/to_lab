@@ -35,12 +35,12 @@
 
 static const TO_LAB_Application_Component_Telecommand_DispatchTable_t TO_LAB_TC_DISPATCH_TABLE = {
     .CMD     = {.AddPacketCmd_indication     = TO_LAB_AddPacket,
-            .NoopCmd_indication          = TO_LAB_Noop,
-            .EnableOutputCmd_indication  = TO_LAB_EnableOutput,
-            .RemoveAllCmd_indication     = TO_LAB_RemoveAll,
-            .RemovePacketCmd_indication  = TO_LAB_RemovePacket,
-            .ResetCountersCmd_indication = TO_LAB_ResetCounters,
-            .SendDataTypesCmd_indication = TO_LAB_SendDataTypes},
+                .NoopCmd_indication          = TO_LAB_Noop,
+                .EnableOutputCmd_indication  = TO_LAB_EnableOutput,
+                .RemoveAllCmd_indication     = TO_LAB_RemoveAll,
+                .RemovePacketCmd_indication  = TO_LAB_RemovePacket,
+                .ResetCountersCmd_indication = TO_LAB_ResetCounters,
+                .SendDataTypesCmd_indication = TO_LAB_SendDataTypes},
     .SEND_HK = {.indication = TO_LAB_SendHousekeeping}};
 
 /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
@@ -65,7 +65,7 @@ void TO_LAB_TaskPipe(const CFE_SB_Buffer_t *SbBufPtr)
 
         if (status == CFE_STATUS_UNKNOWN_MSG_ID)
         {
-            CFE_EVS_SendEvent(TO_MSGID_ERR_EID, CFE_EVS_EventType_ERROR,
+            CFE_EVS_SendEvent(TO_LAB_MSGID_ERR_EID, CFE_EVS_EventType_ERROR,
                               "L%d TO: Invalid Msg ID Rcvd 0x%x status=0x%08x", __LINE__,
                               (unsigned int)CFE_SB_MsgIdToValue(MsgId), (unsigned int)status);
         }
@@ -73,14 +73,14 @@ void TO_LAB_TaskPipe(const CFE_SB_Buffer_t *SbBufPtr)
         {
             CFE_MSG_GetSize(&SbBufPtr->Msg, &MsgSize);
             CFE_MSG_GetFcnCode(&SbBufPtr->Msg, &MsgFc);
-            CFE_EVS_SendEvent(TO_MSGID_ERR_EID, CFE_EVS_EventType_ERROR,
+            CFE_EVS_SendEvent(TO_LAB_MSGID_ERR_EID, CFE_EVS_EventType_ERROR,
                               "Invalid length for command: ID = 0x%X, CC = %d, length = %u",
                               (unsigned int)CFE_SB_MsgIdToValue(MsgId), (int)MsgFc, (unsigned int)MsgSize);
         }
         else
         {
             CFE_MSG_GetFcnCode(&SbBufPtr->Msg, &MsgFc);
-            CFE_EVS_SendEvent(TO_FNCODE_ERR_EID, CFE_EVS_EventType_ERROR,
+            CFE_EVS_SendEvent(TO_LAB_FNCODE_ERR_EID, CFE_EVS_EventType_ERROR,
                               "L%d TO: Invalid Function Code Rcvd In Ground Command 0x%x", __LINE__,
                               (unsigned int)MsgFc);
             ++TO_LAB_Global.HkTlm.Payload.CommandErrorCounter;
