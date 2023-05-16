@@ -18,6 +18,7 @@ endforeach()
 
 set(APP_SRC_FILES
     fsw/src/to_lab_app.c
+    fsw/src/to_lab_eds_dispatch.c
 )
 
 # Create the app module
