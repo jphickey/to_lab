@@ -18,19 +18,15 @@
 
 /**
  * @file
- *   Define TO Lab Messages and info
+ *   TO_LAB Application Message IDs
  */
-#ifndef TO_LAB_MSG_H
-#define TO_LAB_MSG_H
+#ifndef TO_LAB_MSGIDS_H
+#define TO_LAB_MSGIDS_H
 
-/*
- * EDS-defined function codes (*_CC)
- */
-#include "to_lab_eds_cc.h"
+#define TO_LAB_CMD_MID     0x1880
+#define TO_LAB_SEND_HK_MID 0x1881
 
-/*
- * EDS-defined message data types
- */
-#include "to_lab_eds_typedefs.h"
+#define TO_LAB_HK_TLM_MID     0x0880
+#define TO_LAB_DATA_TYPES_MID 0x0881
 
 #endif

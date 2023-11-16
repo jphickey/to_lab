@@ -36,7 +36,7 @@
       <StringDataType name="char_x_16" length="16" />
 
       <!-- TO subscription table -->
-      <ContainerDataType name="SubscriptionEntry" shortDescription="TO_LAB Subscription table entry">
+      <ContainerDataType name="Sub" shortDescription="TO_LAB Subscription table entry">
         <EntryList>
           <Entry name="Stream" type="CFE_SB/MsgId" shortDescription="MsgId to subscribe to" />
           <Entry name="Flags" type="CFE_SB/Qos" shortDescription="Qos for subscription" />
@@ -44,7 +44,7 @@
         </EntryList>
       </ContainerDataType>
 
-      <ArrayDataType name="SubscriptionTable" dataTypeRef="SubscriptionEntry" shortDescription="TO_LAB Complete subscription table">
+      <ArrayDataType name="SubscriptionTable" dataTypeRef="Sub" shortDescription="TO_LAB Complete subscription table">
         <DimensionList>
           <Dimension size="${CFE_MISSION/SB_MAX_PIPES}" />
         </DimensionList>
@@ -102,6 +102,9 @@
           <Entry name="CommandCounter" type="BASE_TYPES/uint8" />
           <Entry name="CommandErrorCounter" type="BASE_TYPES/uint8" />
         </EntryList>
+      </ContainerDataType>
+
+      <ContainerDataType name="SendHkCmd" baseType="CFE_HDR/CommandHeader">
       </ContainerDataType>
 
       <ContainerDataType name="CMD" baseType="CFE_HDR/CommandHeader">
@@ -183,7 +186,7 @@
           <Interface name="SEND_HK" shortDescription="Send telemetry command interface" type="CFE_SB/Telecommand">
             <!-- This uses a bare spacepacket with no payload -->
             <GenericTypeMapSet>
-              <GenericTypeMap name="TelecommandDataType" type="CFE_HDR/CommandHeader" />
+              <GenericTypeMap name="TelecommandDataType" type="SendHkCmd" />
             </GenericTypeMapSet>
           </Interface>
           <Interface name="HK_TLM" shortDescription="Software bus housekeeping telemetry interface" type="CFE_SB/Telemetry">

@@ -18,17 +18,28 @@
 
 /**
  * @file
- *   Define TO Lab Message IDs
+ *   TO_LAB Application Public Definitions
+ *
+ * This provides default values for configurable items that affect
+ * the interface(s) of this module.  This includes the CMD/TLM message
+ * interface, tables definitions, and any other data products that
+ * serve to exchange information with other entities.
+ *
+ * @note This file may be overridden/superceded by mission-provided defintions
+ * either by overriding this header or by generating definitions from a command/data
+ * dictionary tool.
  */
-#ifndef TO_LAB_MSGIDS_H
-#define TO_LAB_MSGIDS_H
+#ifndef TO_LAB_INTERFACE_CFG_H
+#define TO_LAB_INTERFACE_CFG_H
 
-#include "cfe_msgids.h"
+/**
+ * @brief The base UDP port number that TO_LAB will send to
+ */
+#define TO_LAB_TLM_PORT 1235
 
-#define TO_LAB_CMD_MID     CFE_PLATFORM_CMD_TOPICID_TO_MID(CFE_MISSION_TO_LAB_CMD_TOPICID)
-#define TO_LAB_SEND_HK_MID CFE_PLATFORM_CMD_TOPICID_TO_MID(CFE_MISSION_TO_LAB_SEND_HK_TOPICID)
-
-#define TO_LAB_HK_TLM_MID     CFE_PLATFORM_TLM_TOPICID_TO_MID(CFE_MISSION_TO_LAB_HK_TLM_TOPICID)
-#define TO_LAB_DATA_TYPES_MID CFE_PLATFORM_TLM_TOPICID_TO_MID(CFE_MISSION_TO_LAB_DATA_TYPES_TOPICID)
+/**
+ * @brief The maximum number of subscriptions that TO_LAB can subscribe to
+ */
+#define TO_LAB_MAX_SUBSCRIPTIONS 32
 
 #endif
