@@ -24,14 +24,14 @@
  * This is a compatibility header for the "to_lab_msg.h" file that has
  * traditionally provided the message definitions for cFS apps.
  *
- * @note This file may be overridden/superceded by mission-provided defintions
+ * @note This file may be overridden/superceded by mission-provided definitions
  * either by overriding this header or by generating definitions from a command/data
  * dictionary tool.
  */
-#ifndef TO_LAB_MSG_H
-#define TO_LAB_MSG_H
+#ifndef DEFAULT_TO_LAB_MSG_H
+#define DEFAULT_TO_LAB_MSG_H
 
-#include "to_lab_interface_cfg.h"
+#include "to_lab_mission_cfg.h"
 #include "to_lab_msgdefs.h"
 #include "to_lab_msgstruct.h"
 

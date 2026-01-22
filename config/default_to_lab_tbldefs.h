@@ -27,8 +27,8 @@
  *   STRUCTURE DEFINITIONS IN THIS FILE!
  *   ADD THEM TO to_lab_tbl.h IF NEEDED!
  */
-#ifndef TO_LAB_TBLDEFS_H
-#define TO_LAB_TBLDEFS_H
+#ifndef DEFAULT_TO_LAB_TBLDEFS_H
+#define DEFAULT_TO_LAB_TBLDEFS_H
 
 #include "common_types.h"
 #include "to_lab_mission_cfg.h"

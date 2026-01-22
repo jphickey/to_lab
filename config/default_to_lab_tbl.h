@@ -24,8 +24,8 @@
  *   Constants and enumerated types related to these table structures
  *   are defined in to_lab_tbldefs.h.
  */
-#ifndef TO_LAB_TBL_H
-#define TO_LAB_TBL_H
+#ifndef DEFAULT_TO_LAB_TBL_H
+#define DEFAULT_TO_LAB_TBL_H
 
 #include "to_lab_tbldefs.h"
 #include "to_lab_tblstruct.h"

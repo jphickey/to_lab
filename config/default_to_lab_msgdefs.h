@@ -19,12 +19,10 @@
 /**
  * @file
  *   Specification for the TO_LAB command and telemetry
- *   message constant definitions.
- *
- *  For TO_LAB this is only the function/command code definitions
+ *   message payload and constant definitions.
  */
-#ifndef TO_LAB_MSGDEFS_H
-#define TO_LAB_MSGDEFS_H
+#ifndef DEFAULT_TO_LAB_MSGDEFS_H
+#define DEFAULT_TO_LAB_MSGDEFS_H
 
 #include "common_types.h"
 #include "cfe_sb_extern_typedefs.h"

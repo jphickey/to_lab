@@ -25,21 +25,14 @@
  * interface, tables definitions, and any other data products that
  * serve to exchange information with other entities.
  *
- * @note This file may be overridden/superceded by mission-provided defintions
+ * @note This file may be overridden/superceded by mission-provided definitionsm
  * either by overriding this header or by generating definitions from a command/data
  * dictionary tool.
  */
-#ifndef TO_LAB_INTERFACE_CFG_H
-#define TO_LAB_INTERFACE_CFG_H
+#ifndef DEFAULT_TO_LAB_INTERFACE_CFG_VALUES_H
+#define DEFAULT_TO_LAB_INTERFACE_CFG_VALUES_H
 
-/**
- * @brief The base UDP port number that TO_LAB will send to
- */
-#define TO_LAB_TLM_PORT 1235
-
-/**
- * @brief The maximum number of subscriptions that TO_LAB can subscribe to
- */
-#define TO_LAB_MAX_SUBSCRIPTIONS 32
+/* Use the default configuration value for all */
+#define TO_LAB_MISSION_CFGVAL(x) DEFAULT_TO_LAB_MISSION_##x
 
 #endif

@@ -50,6 +50,7 @@ typedef struct
     bool            downlink_on;
     char            tlm_dest_IP[17];
     bool            suppress_sendto;
+    bool            AllowPassthru;
 
     TO_LAB_HkTlm_t        HkTlm;
     TO_LAB_DataTypesTlm_t DataTypesTlm;

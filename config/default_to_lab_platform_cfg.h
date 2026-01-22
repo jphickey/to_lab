@@ -18,22 +18,19 @@
 
 /**
  * @file
+ *   TO_LAB Application Private Config Definitions
  *
- * TO_LAB Application Platform Configuration Header File
+ * This provides default values for configurable items that are internal
+ * to this module and do NOT affect the interface(s) of this module.  Changes
+ * to items in this file only affect the local module and will be transparent
+ * to external entities that are using the public interface(s).
  *
- * This is a compatibility header for the "platform_cfg.h" file that has
- * traditionally provided both public and private config definitions
- * for each CFS app.
- *
- * These definitions are now provided in two separate files, one for
- * the public/mission scope and one for internal scope.
- *
- * @note This file may be overridden/superceded by mission-provided defintions
+ * @note This file may be overridden/superceded by mission-provided definitions
  * either by overriding this header or by generating definitions from a command/data
  * dictionary tool.
  */
-#ifndef TO_LAB_PLATFORM_CFG_H
-#define TO_LAB_PLATFORM_CFG_H
+#ifndef DEFAULT_TO_LAB_PLATFORM_CFG_H
+#define DEFAULT_TO_LAB_PLATFORM_CFG_H
 
 #include "to_lab_mission_cfg.h"
 #include "to_lab_internal_cfg.h"

@@ -25,8 +25,8 @@
  *   Constants and enumerated types related to these message structures
  *   are defined in to_lab_msgdefs.h.
  */
-#ifndef TO_LAB_MSGSTRUCT_H
-#define TO_LAB_MSGSTRUCT_H
+#ifndef DEFAULT_TO_LAB_MSGSTRUCT_H
+#define DEFAULT_TO_LAB_MSGSTRUCT_H
 
 /************************************************************************
  * Includes

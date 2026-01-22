@@ -20,8 +20,8 @@
  * @file
  *   Define TO Lab Performance IDs
  */
-#ifndef TO_LAB_PERFIDS_H
-#define TO_LAB_PERFIDS_H
+#ifndef DEFAULT_TO_LAB_PERFIDS_H
+#define DEFAULT_TO_LAB_PERFIDS_H
 
 #define TO_LAB_MAIN_TASK_PERF_ID   34
 #define TO_LAB_SOCKET_SEND_PERF_ID 35

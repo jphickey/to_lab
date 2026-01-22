@@ -18,14 +18,13 @@
 
 /**
  * @file
- *   TO_LAB Application Topic IDs
+ *   Specification for the TO_LAB topic ID values
  */
-#ifndef TO_LAB_TOPICIDS_H
-#define TO_LAB_TOPICIDS_H
+#ifndef EDS_TO_LAB_TOPICIDS_H
+#define EDS_TO_LAB_TOPICIDS_H
 
-#define CFE_MISSION_TO_LAB_CMD_TOPICID        0x80
-#define CFE_MISSION_TO_LAB_SEND_HK_TOPICID    0x81
-#define CFE_MISSION_TO_LAB_HK_TLM_TOPICID     0x80
-#define CFE_MISSION_TO_LAB_DATA_TYPES_TOPICID 0x81
+#include "cfe_mission_eds_designparameters.h"
+
+#define TO_LAB_MISSION_TIDVAL(x) EdsParam_CFE_MISSION_TO_LAB_##x##_TOPICID
 
 #endif
